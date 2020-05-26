@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Audio version="1.0" timeUnit="ms" interactionArea="#touchArea" gain="-10dB">
-	<Chain portamento="50">
+<Audio version="1.0" timeUnit="ms" interactionArea="#touchArea" gain="-15dB">
+    <Chain portamento="200">
 
-		<OscillatorNode type="sawtooth">
-			<frequency follow="relX" map="0,100,100,1000"></frequency>
-		</OscillatorNode>
+        <OscillatorNode type="sawtooth">
+            <frequency follow="relX" map="0, 100, 60, 200"></frequency>
+        </OscillatorNode>
 
-		<BiquadFilterNode type="lowpass">
-			<frequency follow="relY" map="100,0,0,5000, 3"></frequency>
-		</BiquadFilterNode>
+        <BiquadFilterNode type="lowpass">
+            <frequency follow="relX" map="0, 100, 240, 600"></frequency>
+            <Q follow="relX" map="0, 100, 0, 1, (x * (600-240) + 240) / 38"></Q>
+        </BiquadFilterNode>
 
-		<GainNode>
-			<gain>
-				<Envelope adsr="100,100,50,20" trig="pointer" max="1"></Envelope>
-			</gain>
-		</GainNode>
+        <BiquadFilterNode type="lowpass">
+            <frequency follow="relY" map="100, 0, 600, 2000"></frequency>
+            <Q follow="relY" map="100, 0, 0, 1, (x * (2000-600) + 600) / 45"></Q>
+        </BiquadFilterNode>
 
-	</Chain>
+        <GainNode>
+            <gain>
+                <Envelope adsr="200, 100, 100, 100" trig="pointer" max="1"></Envelope>
+            </gain>
+        </GainNode>
 
+    </Chain>
 </Audio>
