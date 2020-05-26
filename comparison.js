@@ -30,7 +30,7 @@ function compare(lastSequence, storedSequence) {
     }
   }
   const correctRatio = numInMargin / lastSequence.length;
-  const lengthRatio = lastSequence.length / storedSequence.length;
+  const lengthRatio = lastSequence[lastSequence.length - 1].time / storedSequence[storedSequence.length - 1].time;
 
   console.log("Ratio of correct points: " + correctRatio);
   console.log("Length ratio: " + lengthRatio);
